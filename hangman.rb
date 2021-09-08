@@ -47,7 +47,7 @@ class Game
 
   def create_words_array (txt)
     words = File.read "#{txt}"
-    words.split("\r\n")
+    words.split("\n")
   end
 
   def create_filtered_words_array (words_array)
@@ -117,7 +117,7 @@ class Game
   end
 
   def ask_to_save_game(game)
-    puts "Type 'save' to save the current game."
+    puts "Type 'save' to save the current game, or anything else to continue..."
     answer = gets.chomp
     if (answer == "save") || (answer == "Save") || (answer == "SAVE")
       save_game(game)
@@ -139,9 +139,9 @@ class Game
   end
 
   def ask_to_load_game(game)
-    puts "Type 'load' to load previous game..."
+    puts "Type 'load' to load previous game, or anything else to continue..."
     answer = gets.chomp
-    if (answer == "load") || (answer == "LOAD") || (answer == "Load")
+    if ((answer == "load") || (answer == "LOAD") || (answer == "Load")) && (File.exists? "savedgame.txt")
       game = game.saved_game
       game.play(game)
     else
